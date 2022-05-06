@@ -42,10 +42,10 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public Iterator<Item> iterator() {
-        return new DoublyLinkedListIterator();
+        return new DequeIterator();
     }
 
-    private class DoublyLinkedListIterator implements Iterator<Item> {
+    private class DequeIterator implements Iterator<Item> {
         public boolean hasNext() {return false;}
 
         public void remove() {throw new UnsupportedOperationException();}
