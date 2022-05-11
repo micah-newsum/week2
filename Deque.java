@@ -5,10 +5,10 @@ public class Deque<Item> implements Iterable<Item> {
     private Node<Item> last;
     private int size;
 
-    private class Node<Item> {
-        Node<Item> prev;
-        Node<Item> next;
-        Item item;
+    private class Node<T> {
+        protected Node<T> prev;
+        protected Node<T> next;
+        protected T item;
 
         Node() {
             this.prev = null;
@@ -43,20 +43,37 @@ public class Deque<Item> implements Iterable<Item> {
 
         newFirst.next = oldFirst;
         oldFirst.prev = newFirst;
+        this.first = newFirst;
+        size++;
     }
 
     public void addLast(Item item) {
         if (item == null) {
             throw new IllegalArgumentException();
         }
+
+        Node<Item> newLast = new Node<>();
+        newLast.item = item;
+
+        Node<Item> oldLast = this.last;
+        oldLast.next = newLast;
+        newLast.prev = oldLast;
+        this.last = newLast;
+        size++;
     }
 
     public Item removeFirst() {
-        return null;
+        Node<Item> oldFirst = this.first;
+        this.first = oldFirst.next;
+        size--;
+        return oldFirst.item;
     }
 
     public Item removeLast() {
-        return null;
+        Node<Item> oldLast = this.last;
+        this.last = oldLast.prev;
+        size--;
+        return oldLast.item;
     }
 
     public Iterator<Item> iterator() {
@@ -78,6 +95,15 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-
+        Deque<String> stringDeque = new Deque<>();
+        stringDeque.addFirst("Hello");
+        stringDeque.addLast("World");
+        System.out.println(stringDeque.size());
+        String first = stringDeque.removeFirst();
+        System.out.println(first);
+        System.out.println(stringDeque.size());
+        String last = stringDeque.removeLast();
+        System.out.println(last);
+        System.out.println(stringDeque.size());
     }
 }
