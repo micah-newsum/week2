@@ -133,9 +133,8 @@ public class Deque<Item> implements Iterable<Item> {
 
         stringDeque = new Deque<>();
         stringDeque.addFirst("Hello");
-        stringDeque.addLast("World");
-        stringDeque.addLast("My");
-        stringDeque.addLast("Name");
+        stringDeque.addLast("my");
+        stringDeque.addLast("name");
         stringDeque.addLast("is");
         stringDeque.addLast("Micah");
         Iterator<String> i = stringDeque.iterator();
