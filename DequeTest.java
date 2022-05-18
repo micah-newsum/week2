@@ -9,4 +9,10 @@ public class DequeTest {
         Deque<String> deque = new Deque<>();
         deque.addFirst(null);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addLastThrowsIllegalArgumentException() {
+        Deque<String> deque = new Deque<>();
+        deque.addLast(null);
+    }
 }
