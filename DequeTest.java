@@ -1,5 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -42,6 +44,19 @@ public class DequeTest {
         Deque<String> deque = new Deque<>();
         Iterator<String> i = deque.iterator();
         i.remove();;
+    }
+
+    @Test
+    public void isEmptyReturnsTrue() {
+        Deque<String> deque = new Deque<>();
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    public void isEmptyReturnsFalse() {
+        Deque<String> deque = new Deque<>();
+        deque.addFirst("item");
+        assertFalse(deque.isEmpty());
     }
 
     @Test
