@@ -2,6 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class DequeTest {
@@ -28,5 +29,19 @@ public class DequeTest {
     public void removeLastThrowsNoSuchElementException() {
         Deque<String> deque = new Deque<>();
         deque.removeLast();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void nextThrowsNoSuchElementException() {
+        Deque<String> deque = new Deque<>();
+        Iterator<String> i = deque.iterator();
+        i.next();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeThrowsUnsupportedOperationException() {
+        Deque<String> deque = new Deque<>();
+        Iterator<String> i = deque.iterator();
+        i.remove();;
     }
 }
