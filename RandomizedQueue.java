@@ -1,4 +1,7 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] items;
@@ -38,11 +41,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public Item dequeue() {
-        // check if head is 1/4th size of capacity
+        if (size == 0) { throw new NoSuchElementException(); }
 
-        Item item = (Item) items[head];
-        items[head] = null;
-        head++;
+        int index = StdRandom.uniform(size);
+        Item item = items[index];
+        items[index] = items[--size];
         return item;
     }
 
