@@ -6,15 +6,9 @@ import edu.princeton.cs.algs4.StdRandom;
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] items;
     private int size;
-    private int head;
-    private int tail;
-    private int capacity;
 
     public RandomizedQueue() {
-        this.capacity = 10;
         this.items = (Item[]) new Object[1];
-        this.head = 0;
-        this.tail = 0;
         this.size = 0;
     }
 
@@ -46,6 +40,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int index = StdRandom.uniform(size);
         Item item = items[index];
         items[index] = items[--size];
+
+        if (size <= items.length / 4) {
+            Item[] newItems = (Item[]) new Object[size / 2];
+            for (int i = 0; i < items.length; i++) {
+                newItems[i] = this.items[i];
+            }
+            items = newItems;
+        }
+
         return item;
     }
 
