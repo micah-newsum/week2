@@ -54,28 +54,28 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return a random item, but do not remove it
     public Item sample() {
-        return (Item) items[0];
+        if (size == 0) { throw new NoSuchElementException(); }
+        return items[StdRandom.uniform(size)];
     }
 
     public Iterator<Item> iterator() {
-        return new RandomizedQueueIterator<Item>();
+        return new RandomizedQueueIterator();
     }
 
-    private class RandomizedQueueIterator<Item> implements Iterator<Item> {
-        private Object[] iteratorItems;
-        
+    private class RandomizedQueueIterator implements Iterator<Item> {
+        private final int[] indices = new int[size];
+        private int currentIndex = 0;
+
         private RandomizedQueueIterator() {
-            // copy conents of queue to iterator's queue
-            iteratorItems = new Object[tail - head];
-            int iteratorIndex = 0;
-            for (int i = head; i <= tail; i++) {
-                iteratorItems[iteratorIndex] = items[i];
-                iteratorIndex++;
+            for (int i = 0; i < size; i++) {
+                indices[i] = i;
             }
+
+            StdRandom.shuffle(indices);
         }
 
         public boolean hasNext() {
-
+            return currentIndex < indices.length;
         }
 
         public void remove() {
@@ -83,7 +83,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
-
+            if (!hasNext()) { throw new NoSuchElementException(); }
+            return items[indices[currentIndex++]];
         }
     }
 
