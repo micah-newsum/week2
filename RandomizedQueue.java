@@ -1,7 +1,7 @@
 import java.util.Iterator;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
-    private Object[] items;
+    private Item[] items;
     private int size;
     private int head;
     private int tail;
@@ -9,14 +9,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public RandomizedQueue() {
         this.capacity = 10;
-        this.items = new Object[capacity];
+        this.items = (Item[]) new Object[1];
         this.head = 0;
         this.tail = 0;
         this.size = 0;
     }
 
     public boolean isEmpty() {
-        return (size == 0);
+        return size == 0;
     }
 
     public int size() {
@@ -24,11 +24,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
-        if (tail == capacity) { 
-            // double array size
+        if (item == null) { throw new IllegalArgumentException(); }
+
+        items[size] = item;
+        size++;
+        if (size == items.length) {
+            Item[] newItems = (Item[]) new Object[size * 2];
+            for (int i = 0; i < items.length; i++) {
+                newItems[i] = this.items[i];
+            }
+            items = newItems;
         }
-        items[tail] = item;
-        tail++;
     }
 
     public Item dequeue() {
