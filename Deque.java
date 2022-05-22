@@ -48,32 +48,31 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
 
-        Node newLast = new Node();
-        newLast.item = item;
+        Node node = new Node();
+        node.item = item;
 
         // adding item to empty deque
-        if (this.first == null && this.last == null) {
-            this.last = newLast;
-            this.first = this.last;
+        if (tail == null) {
+            tail = node;
+            head = node;
         } else {
-            Node oldLast = this.last;
-            oldLast.next = newLast;
-            newLast.prev = oldLast;
-            this.last = newLast;
+            node.prev = tail;
+            tail.next = node;
+            tail = node;
         }
 
         size++;
     }
 
     public Item removeFirst() {
-        if (this.first == null) {
+        if (head == null) {
             throw new NoSuchElementException();
         }
 
-        Node oldFirst = this.first;
-        this.first = oldFirst.next;
+        Node node = head;
+        head = head.next;
         size--;
-        return oldFirst.item;
+        return node.item;
     }
 
     public Item removeLast() {
