@@ -2,8 +2,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
-    private Node first;
-    private Node last;
+    private Node head;
+    private Node tail;
     private int size;
 
     private class Node {
@@ -12,9 +12,7 @@ public class Deque<Item> implements Iterable<Item> {
         Node next;
     }
 
-    public Deque() {
-        this.size = 0;
-    }
+    public Deque() {}
 
     public boolean isEmpty() {
         return (size == 0);
@@ -29,18 +27,17 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
 
-        Node newFirst = new Node();
-        newFirst.item = item;
+        Node node = new Node();
+        node.item = item;
 
         // adding item to empty deque
-        if (this.first == null && this.last == null) {
-            this.first = newFirst;
-            this.last = this.first;
+        if (head == null) {
+            head = node;
+            tail = node;
         } else {
-            Node oldFirst = this.first;
-            newFirst.next = oldFirst;
-            oldFirst.prev = newFirst;
-            this.first = newFirst;
+            node.next = head;
+            head.prev = node;
+            head = node;
         }
 
         size++;
