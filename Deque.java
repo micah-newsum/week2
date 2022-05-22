@@ -2,14 +2,14 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
-    private Node<Item> first;
-    private Node<Item> last;
+    private Node first;
+    private Node last;
     private int size;
 
-    private class Node<T> {
-        protected Node<T> prev;
-        protected Node<T> next;
-        protected T item;
+    private class Node {
+        Item item;
+        Node prev;
+        Node next;
     }
 
     public Deque() {
@@ -29,7 +29,7 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
 
-        Node<Item> newFirst = new Node<>();
+        Node newFirst = new Node();
         newFirst.item = item;
 
         // adding item to empty deque
@@ -37,7 +37,7 @@ public class Deque<Item> implements Iterable<Item> {
             this.first = newFirst;
             this.last = this.first;
         } else {
-            Node<Item> oldFirst = this.first;
+            Node oldFirst = this.first;
             newFirst.next = oldFirst;
             oldFirst.prev = newFirst;
             this.first = newFirst;
@@ -51,7 +51,7 @@ public class Deque<Item> implements Iterable<Item> {
             throw new IllegalArgumentException();
         }
 
-        Node<Item> newLast = new Node<>();
+        Node newLast = new Node();
         newLast.item = item;
 
         // adding item to empty deque
@@ -59,7 +59,7 @@ public class Deque<Item> implements Iterable<Item> {
             this.last = newLast;
             this.first = this.last;
         } else {
-            Node<Item> oldLast = this.last;
+            Node oldLast = this.last;
             oldLast.next = newLast;
             newLast.prev = oldLast;
             this.last = newLast;
@@ -73,7 +73,7 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NoSuchElementException();
         }
 
-        Node<Item> oldFirst = this.first;
+        Node oldFirst = this.first;
         this.first = oldFirst.next;
         size--;
         return oldFirst.item;
@@ -84,7 +84,7 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NoSuchElementException();
         }
 
-        Node<Item> oldLast = this.last;
+        Node oldLast = this.last;
         this.last = oldLast.prev;
         size--;
         return oldLast.item;
@@ -95,9 +95,9 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     private class DequeIterator implements Iterator<Item> {
-        private Node<Item> current;
+        private Node current;
 
-        private DequeIterator(Node<Item> first) {
+        private DequeIterator(Node first) {
             current = first;
         }
 
