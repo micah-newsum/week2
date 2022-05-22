@@ -80,11 +80,18 @@ public class Deque<Item> implements Iterable<Item> {
             throw new NoSuchElementException();
         }
 
-        Node node = tail;
-        tail = tail.prev;
-        tail.next = null;
+        Item item = tail.item;
+
+        if (size == 1) {
+            head = null;
+            tail = null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+        }
+
         size--;
-        return node.item;
+        return item;
     }
 
     public Iterator<Item> iterator() {
