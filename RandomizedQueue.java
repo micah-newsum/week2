@@ -1,6 +1,8 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.junit.runners.model.InvalidTestClassError;
+
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
@@ -89,6 +91,21 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
+        RandomizedQueue<String> queue = new RandomizedQueue<>();
+        queue.enqueue("Hello");
+        queue.enqueue("World");
+        queue.enqueue("my");
+        queue.enqueue("name");
+        queue.enqueue("is");
+        queue.enqueue("Micah");
+        
+        Iterator<String> i = queue.iterator();
+        while (i.hasNext()) {
+            System.out.println(i.next());
+        }
 
+        System.out.println(queue.dequeue());
+
+        i.remove();
     }
 }
