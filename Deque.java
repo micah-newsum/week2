@@ -145,5 +145,7 @@ public class Deque<Item> implements Iterable<Item> {
         while (i.hasNext()) {
             System.out.println(i.next());
         }
+
+        i.remove();
     }
 }
