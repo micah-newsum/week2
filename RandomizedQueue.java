@@ -1,8 +1,6 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.junit.runners.model.InvalidTestClassError;
-
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
