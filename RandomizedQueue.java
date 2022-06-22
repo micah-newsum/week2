@@ -8,8 +8,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int size;
 
     public RandomizedQueue() {
-        this.items = (Item[]) new Object[1];
-        this.size = 0;
+        items = (Item[]) new Object[1];
+        size = 0;
     }
 
     public boolean isEmpty() {
@@ -26,9 +26,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         items[size] = item;
         size++;
         if (size == items.length) {
-            Item[] newItems = (Item[]) new Object[size * 2];
-            for (int i = 0; i < items.length; i++) {
-                newItems[i] = this.items[i];
+            Item[] newItems = (Item[]) new Object[items.length * 2];
+            for (int i = 0; i < size; i++) {
+                newItems[i] = items[i];
             }
             items = newItems;
         }
@@ -42,9 +42,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         items[index] = items[--size];
 
         if (size <= items.length / 4) {
-            Item[] newItems = (Item[]) new Object[size / 2];
-            for (int i = 0; i < items.length; i++) {
-                newItems[i] = this.items[i];
+            Item[] newItems = (Item[]) new Object[items.length / 2];
+            for (int i = 0; i < size; i++) {
+                newItems[i] = items[i];
             }
             items = newItems;
         }
@@ -103,7 +103,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         System.out.println(queue.dequeue());
-
+        System.out.println(queue.sample());
         i.remove();
     }
 }

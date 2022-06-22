@@ -43,7 +43,7 @@ public class DequeTest {
     public void removeThrowsUnsupportedOperationException() {
         Deque<String> deque = new Deque<>();
         Iterator<String> i = deque.iterator();
-        i.remove();;
+        i.remove();
     }
 
     @Test
@@ -88,7 +88,7 @@ public class DequeTest {
     }
 
     @Test
-    public void testDequeIterator(){
+    public void testDequeIterator() {
         Deque<String> deque = new Deque<>();
         deque.addFirst("My");
         deque.addFirst("name");
@@ -96,9 +96,79 @@ public class DequeTest {
         deque.addFirst("Micah");
         Iterator<String> i = deque.iterator();
         String s = "";
-        while (i.hasNext()){
+        while (i.hasNext()) {
             s = s + i.next() + " ";
         }
         assertEquals("Micah is name My ", s);
+    }
+
+    @Test
+    public void submissionRemoveFirstError() {
+        Deque<Integer> deque = new Deque<>();
+        deque.addLast(1);
+        deque.removeFirst();
+        deque.addLast(3);
+        deque.removeFirst();
+    }
+
+    @Test
+    public void submissionIsEmptyTest() {
+        Deque<Integer> deque = new Deque<>();
+        deque.isEmpty();
+        deque.isEmpty();
+        deque.isEmpty();
+        deque.isEmpty();
+        deque.addLast(5);
+        deque.removeFirst();
+        deque.isEmpty();
+        deque.isEmpty();
+        deque.isEmpty();
+        deque.addLast(10);
+        deque.removeFirst();
+    }
+
+    @Test
+    public void randomCallsToApi() {
+        Deque<Integer> deque = new Deque<>();
+        deque.addLast(1);
+        deque.removeLast();    
+        deque.addLast(3);
+        deque.removeFirst();     
+        deque.isEmpty();        
+        deque.size();            
+        deque.addLast(7);
+        deque.removeFirst();
+    }
+
+    @Test
+    public void iteratorTest() {
+        Deque<Integer> deque = new Deque<>();
+        deque.addFirst(1);
+        Iterator<Integer> iterator = deque.iterator();
+        int size = 0;
+        while (iterator.hasNext()) {
+            iterator.next();
+            size++;
+        }
+        assertEquals(1, size);
+        
+        deque.removeFirst(); 
+        iterator = deque.iterator();     
+        size = 0;
+        while (iterator.hasNext()) {
+            iterator.next();
+            size++;
+        }
+
+        assertEquals(0, size);
+        
+        deque.addLast(3);
+        iterator = deque.iterator();
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            size++;
+        }
+        assertEquals(1, size);
     }
 }
